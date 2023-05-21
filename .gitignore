@@ -28,6 +28,6 @@ __pycache__/
 
 
 backend/Learning-to-See-in-the-Dark/venv/
-backend/Learning-to-See-in-the-Dark/
-backend/yolov5/
+backend/Learning-to-See-in-the-Dark/result_Sony/final
+backend/yolov5/runs/detect/
 backend/test_images/
