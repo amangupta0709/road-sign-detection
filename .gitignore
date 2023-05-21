@@ -24,3 +24,10 @@ yarn-debug.log*
 yarn-error.log*
 
 __pycache__/
+*.pyc
+
+
+backend/Learning-to-See-in-the-Dark/venv/
+backend/Learning-to-See-in-the-Dark/
+backend/yolov5/
+backend/test_images/
