@@ -88,13 +88,23 @@ const ImageUpload = () => {
         </Button>
         <div className="imageWrapper">
           {loadingImage1 && (
-            <Skeleton variant="rounded" width={300} height={300} />
+            <Skeleton
+              variant="rounded"
+              sx={{ bgcolor: "grey.500" }}
+              width={300}
+              height={300}
+            />
           )}
           {loadingImage1 === false && (
             <img src={`data:image/jpeg;base64,${image1String}`} alt="1" />
           )}
           {loadingImage2 && (
-            <Skeleton variant="rounded" width={300} height={300} />
+            <Skeleton
+              variant="rounded"
+              sx={{ bgcolor: "grey.500" }}
+              width={300}
+              height={300}
+            />
           )}
           {loadingImage2 === false && (
             <img src={`data:image/jpeg;base64,${image2String}`} alt="1" />
