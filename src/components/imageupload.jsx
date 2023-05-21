@@ -1,7 +1,12 @@
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import Button from "@mui/material/Button";
+import Skeleton from "@mui/material/Skeleton";
 import axios from "axios";
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const ImageUpload = () => {
-  const [uploading, setUploading] = useState(false);
   const [loadingImage1, setLoadingImage1] = useState(null);
   const [loadingImage2, setLoadingImage2] = useState(null);
   const [image1String, setImage1String] = useState("");
@@ -24,10 +29,13 @@ const ImageUpload = () => {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append("img", file);
-    const base64image = await convertBase64(file);
 
-    setUploading(true);
+    toast.success("Image Uploading", {
+      theme: "dark",
+      pauseOnHover: false,
+    });
     setLoadingImage1(true);
+    setLoadingImage2(true);
 
     // Simulate image upload progress
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -61,23 +69,38 @@ const ImageUpload = () => {
 
     // Hit API to fetch the second image
     // Replace 'api/image2' with your actual backend API endpoint
-
-    setUploading(false);
   };
 
   return (
-    <div>
-      {uploading && <p>Uploading image...</p>}
-      {loadingImage1 && <p>Loading first image...</p>}
-      {loadingImage1 === false && (
-        <img src={`data:image/jpeg;base64,${image1String}`} alt="1" />
-      )}
-      {loadingImage2 && <p>Loading second image...</p>}
-      {loadingImage2 === false && (
-        <img src={`data:image/jpeg;base64,${image2String}`} alt="1" />
-      )}
-
-      <input type="file" onChange={handleImageUpload} />
+    <div className="appWrapper">
+      <ToastContainer />
+      <div className="headerBackground"></div>
+      <div className="headerWrapper">
+        <div className="headerTitle">Road Sign Detection and Night Vision</div>
+        <Button
+          className="headerUploadButton"
+          variant="outlined"
+          color="warning"
+          component="label"
+        >
+          Upload Image <CloudUploadIcon style={{ marginLeft: "0.7rem" }} />
+          <input type="file" hidden onChange={handleImageUpload} />
+        </Button>
+        <div className="imageWrapper">
+          {loadingImage1 && (
+            <Skeleton variant="rounded" width={300} height={300} />
+          )}
+          {loadingImage1 === false && (
+            <img src={`data:image/jpeg;base64,${image1String}`} alt="1" />
+          )}
+          {loadingImage2 && (
+            <Skeleton variant="rounded" width={300} height={300} />
+          )}
+          {loadingImage2 === false && (
+            <img src={`data:image/jpeg;base64,${image2String}`} alt="1" />
+          )}
+        </div>
+      </div>
     </div>
   );
 };
